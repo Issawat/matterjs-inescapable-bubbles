@@ -1,6 +1,8 @@
 # matterjs-inescapable-bubbles
 The experiment of the fantasy bubbles visualization made with matter.js
 
+Try live demo [here](https://inescapable-bubbles.netlify.app/)
+
 # How to spin this thing up?
 
 Just run
