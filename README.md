@@ -10,3 +10,6 @@ Just run
 ```
 
 That's it!
+
+
+If that doesn't work for the first time, just run `pnpm install` then `pnpm dev` again
