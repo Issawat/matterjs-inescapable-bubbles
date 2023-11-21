@@ -20,16 +20,23 @@ const element = document.body;
 const engine = Engine.create({
   gravity: {
     x: 0,
-    y: 0.5,
+    y: 0.3,
   },
 });
 
 // create a renderer
-const render = Render.create({ element, engine });
+const render = Render.create({
+  element,
+  engine,
+  options: {
+    width: element.clientWidth,
+    height: element.clientHeight,
+  },
+});
 Render.run(render);
 
 // generate random circles
-const circles = generateRandomCircles(render.canvas.width, 20);
+const circles = generateRandomCircles(render.canvas.width, 40);
 
 const colliderCircle = Bodies.circle(
   -COLLISION_CIRCLE_RADIUS,
@@ -43,20 +50,44 @@ const colliderCircle = Bodies.circle(
   }
 );
 
-const ceiling = Bodies.rectangle(400, 0, 810, 10, {
-  isStatic: true,
-});
+const ceiling = Bodies.rectangle(
+  400,
+  0,
+  element.clientWidth * window.devicePixelRatio * 1.5,
+  20,
+  {
+    isStatic: true,
+  }
+);
 
-const ground = Bodies.rectangle(400, 610, 810, 30, {
-  isStatic: true,
-});
+const ground = Bodies.rectangle(
+  0,
+  element.clientHeight,
+  element.clientWidth * window.devicePixelRatio * 1.5,
+  20,
+  {
+    isStatic: true,
+  }
+);
 
-const leftWall = Bodies.rectangle(0, 0, 10, 1200, {
-  isStatic: true,
-});
-const rightWall = Bodies.rectangle(render.canvas.width, 0, 10, 1200, {
-  isStatic: true,
-});
+const leftWall = Bodies.rectangle(
+  0,
+  0,
+  20,
+  element.clientHeight * window.devicePixelRatio * 2,
+  {
+    isStatic: true,
+  }
+);
+const rightWall = Bodies.rectangle(
+  render.canvas.width,
+  0,
+  20,
+  element.clientHeight * window.devicePixelRatio * 2,
+  {
+    isStatic: true,
+  }
+);
 
 // create mouse
 const mouse = Mouse.create(element);
