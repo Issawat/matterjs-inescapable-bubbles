@@ -11,7 +11,7 @@ import {
 } from "matter-js";
 import { generateRandomCircles } from "./shapes/circle";
 
-const COLLISION_CIRCLE_RADIUS = 200;
+const COLLISION_CIRCLE_RADIUS = 100;
 
 //Target element
 const element = document.body;
@@ -20,7 +20,7 @@ const element = document.body;
 const engine = Engine.create({
   gravity: {
     x: 0,
-    y: 0.3,
+    y: 1,
   },
 });
 
@@ -29,6 +29,7 @@ const render = Render.create({
   element,
   engine,
   options: {
+    wireframes: false,
     width: element.clientWidth,
     height: element.clientHeight,
   },
@@ -94,13 +95,22 @@ const mouse = Mouse.create(element);
 
 // add all of the bodies to the world
 Composite.add(engine.world, [
-  ...circles,
   colliderCircle,
   ground,
   leftWall,
   rightWall,
   ceiling,
 ]);
+
+let addCircleCount = 0;
+
+const interval = setInterval(() => {
+  Composite.add(engine.world, circles[addCircleCount]);
+  addCircleCount++;
+  if (addCircleCount >= circles.length) {
+    clearInterval(interval);
+  }
+}, 100);
 
 const mouseConstraint = MouseConstraint.create(engine, {
   mouse,

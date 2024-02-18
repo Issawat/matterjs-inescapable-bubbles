@@ -11,8 +11,16 @@ export function generateRandomCircles(
   for (let i = 0; i < count; i++) {
     const radius = Math.random() * (maxRadius - minRadius) + minRadius;
     const x = Math.random() * (areaWidth - radius * 2) + radius;
-    const circle = Bodies.circle(x, 10, radius, {
-        restitution: 0.5
+    const circle = Bodies.circle(x, 0, radius, {
+      restitution: 0.5,
+      render: {
+        sprite: {
+          texture:
+            "https://png.monster/wp-content/uploads/2022/08/png.monster-86.png",
+          xScale: radius * 0.005,
+          yScale: radius * 0.005,
+        },
+      },
     });
     circles.push(circle); // Add the circle to the circles array
   }
